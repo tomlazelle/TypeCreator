@@ -17,7 +17,7 @@ namespace WebTestApp
         {
             var container = TypeRegistry.Construct(x =>
             {
-                x.Add(new TypeAction<ICustomer, Customer>{FuncToExecute = p => {p.Name = "tom test"; return p;}});
+                x.Add(new TypeAction<ICustomer, Customer>{AfterCreationDoThis = p => {p.Name = "tom test"; return p;}});
                 x.Add(new TypeAction<IRepository, Repository>
                 {
                     LifeSpan = LifeSpans.Singleton

@@ -13,6 +13,6 @@ namespace TypeCreator.AddStrategy
     public interface ITypeAction<TInterface,TConcrete>:IBaseTypeAction
     {
 
-        Func<TInterface, TInterface> FuncToExecute { get; set; }        
+        Func<TInterface, TInterface> AfterCreationDoThis { get; set; }        
     }
 }

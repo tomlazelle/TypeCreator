@@ -16,7 +16,7 @@ namespace TypeCreator.Tests
             {
                 x.Add(new TypeAction<ICustomer, Customer>
                 {
-                    FuncToExecute = a =>
+                    AfterCreationDoThis = a =>
                     {
                         a.Name = "this is a test";
                         return a;

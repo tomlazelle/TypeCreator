@@ -38,6 +38,6 @@ namespace TypeCreator.AddStrategy
 
         public string Key { get; set; }
 
-        public Func<TInterface, TInterface> FuncToExecute { get; set; }
+        public Func<TInterface, TInterface> AfterCreationDoThis { get; set; }
     }
 }

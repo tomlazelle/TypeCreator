@@ -19,7 +19,7 @@ namespace TypeCreator.Tests
             {
                 x.Add(new TypeAction<ICustomer, Customer>
                 {
-                    FuncToExecute = f =>
+                    AfterCreationDoThis = f =>
                     {
                         f.Name = "this is a test";
                         return proxy.CreateInterfaceProxyWithTargetInterface(f, new TestInterceptor());
