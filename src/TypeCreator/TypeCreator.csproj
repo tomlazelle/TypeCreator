@@ -48,7 +48,6 @@
     <Compile Include="Creation\SingletonLifeSpan.cs" />
     <Compile Include="Creation\TypeContextFactory.cs" />
     <Compile Include="ITypeContext.cs" />
-    <Compile Include="LifeSpans.cs" />
     <Compile Include="SetterExtensions.cs" />
     <Compile Include="TypeContext.cs" />
     <Compile Include="TypeExtensions.cs" />

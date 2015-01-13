@@ -1,4 +1,5 @@
 ﻿using System;
+using TypeCreator.Creation;
 
 namespace TypeCreator.AddStrategy
 {
@@ -7,7 +8,7 @@ namespace TypeCreator.AddStrategy
         Type InterfaceType { get; set; }
         Type TypeToCreate { get; set; }
         string Key { get; set; }
-        LifeSpans LifeSpan { get; set; }        
+        ILifeSpan LifeSpan { get; set; }        
     }
 
     public interface ITypeAction<TInterface,TConcrete>:IBaseTypeAction

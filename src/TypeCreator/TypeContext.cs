@@ -53,34 +53,40 @@ namespace TypeCreator
 
         public void TypeScanner(Assembly[] assemblies)
         {
+
             new ConventionScanner().Assemblies(assemblies)
-                .Do(x =>
+                .Do((x, y) =>
                 {
                     var interfaces = x.GetInterfaces();
                     foreach (var type in interfaces)
                     {
-                        _factory.Add(new TypeAction(type, x));
+                        y.Add(new TypeAction(type, x));
                     }
-                }).Scan();
+                }).Execute(_factory);
         }
 
         public void TypeScanner(Assembly[] assemblies, Type[] types)
         {
             new ConventionScanner().Assemblies(assemblies)
                 .Matches(types)
-                .Do(x =>
+                .Do((x, y) =>
                 {
                     var interfaces = x.GetInterfaces();
                     if (interfaces != null)
                     {
                         foreach (var type in interfaces)
                         {
-                            _factory.Add(new TypeAction(type, x));
+                            y.Add(new TypeAction(type, x));
                         }
                     }
 
-                    _factory.Add(new TypeAction(x, x));
-                }).Scan();
+                    y.Add(new TypeAction(x, x));
+                }).Execute(_factory);
+        }
+
+        public void AddTypeScanner(IConventionScanner conventionScanner)
+        {
+            conventionScanner.Execute(_factory);
         }
 
         public void Dispose()

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using TypeCreator;
 using TypeCreator.AddStrategy;
+using TypeCreator.Creation;
 using TypeCreator.ServiceProvider;
 using WebActivatorEx;
 using WebTestApp;
@@ -20,7 +21,7 @@ namespace WebTestApp
                 x.Add(new TypeAction<ICustomer, Customer>{AfterCreationDoThis = p => {p.Name = "tom test"; return p;}});
                 x.Add(new TypeAction<IRepository, Repository>
                 {
-                    LifeSpan = LifeSpans.Singleton
+                    LifeSpan = new SingletonLifeSpan()
                 });
                 
             });

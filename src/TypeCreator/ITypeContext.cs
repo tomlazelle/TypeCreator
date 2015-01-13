@@ -24,5 +24,6 @@ namespace TypeCreator
         void TypeScanner(Assembly[] assemblies);
         void TypeScanner(Assembly[] assemblies, Type[] types);
 
+        void AddTypeScanner(IConventionScanner conventionScanner);
     }
 }

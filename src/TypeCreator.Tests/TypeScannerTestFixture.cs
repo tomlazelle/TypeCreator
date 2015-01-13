@@ -1,5 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Reflection;
+using NUnit.Framework;
 using Should;
+using TypeCreator.AddStrategy;
+using TypeCreator.Creation;
 using TypeCreator.Tests.TestObjects;
 
 namespace TypeCreator.Tests
@@ -13,11 +17,16 @@ namespace TypeCreator.Tests
             var container = TypeRegistry.Construct(x =>
             {
                 x.TypeScanner(new[] { typeof(ICustomer).Assembly });
+                x.AddTypeScanner(new CustomTypeScanner());
             });
 
             var repo = container.GetInstance<IRepository>();
 
             repo.ShouldNotBeNull();
+
+            var test = container.GetInstance<UsedForScannerOnly>();
+
+            test.Name.ShouldEqual(typeof(UsedForScannerOnly).Name);
         }
 
         [Test]
@@ -32,5 +41,23 @@ namespace TypeCreator.Tests
 
             customer.ShouldNotBeNull();
         }
+    }
+
+    public class CustomTypeScanner : IConventionScanner
+    {
+        public void Execute(TypeContextFactory factory)
+        {
+            factory.Add(new TypeAction<UsedForScannerOnly,UsedForScannerOnly>());
+        }
+    }
+
+    public class UsedForScannerOnly
+    {
+        public UsedForScannerOnly()
+        {
+            Name = GetType().Name;
+        }
+
+        public string Name { get; set; }
     }
 }

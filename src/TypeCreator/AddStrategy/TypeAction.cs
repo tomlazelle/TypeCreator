@@ -1,4 +1,5 @@
 ﻿using System;
+using TypeCreator.Creation;
 
 namespace TypeCreator.AddStrategy
 {
@@ -8,7 +9,7 @@ namespace TypeCreator.AddStrategy
         {
             InterfaceType = TInterface;
             TypeToCreate = TConcrete;
-            LifeSpan = LifeSpans.Unique;
+            LifeSpan = new DefaultLifeSpan();
         }
 
         public Type InterfaceType { get; set; }
@@ -17,7 +18,7 @@ namespace TypeCreator.AddStrategy
 
         public string Key { get; set; }
 
-        public LifeSpans LifeSpan { get; set; }
+        public ILifeSpan LifeSpan { get; set; }
 
     }
 
@@ -27,10 +28,10 @@ namespace TypeCreator.AddStrategy
         {
             InterfaceType = typeof(TInterface);
             TypeToCreate = typeof(TConcrete);
-            LifeSpan = LifeSpans.Unique;
+            LifeSpan = new DefaultLifeSpan();
         }
 
-        public LifeSpans LifeSpan { get; set; }
+        public ILifeSpan LifeSpan { get; set; }
 
         public Type InterfaceType { get; set; }
 

@@ -15,9 +15,9 @@ namespace TypeCreator.Creation
             if (typeAction.GetType().GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(ITypeAction<,>)))
             {
                 dynamic typeContainer = typeAction;
-                if (typeContainer.FuncToExecute != null)
+                if (typeContainer.AfterCreationDoThis != null)
                 {
-                    concreteResult = typeContainer.FuncToExecute((dynamic)concreteResult);
+                    concreteResult = typeContainer.AfterCreationDoThis((dynamic)concreteResult);
                 }
             }
 

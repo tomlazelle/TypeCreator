@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Should;
 using TypeCreator.AddStrategy;
+using TypeCreator.Creation;
 using TypeCreator.Tests.TestObjects;
 
 namespace TypeCreator.Tests
@@ -15,8 +16,9 @@ namespace TypeCreator.Tests
             {
                 x.Add(new TypeAction<IRepository, Repository>
                 {
-                    LifeSpan = LifeSpans.Singleton
+                    LifeSpan = new SingletonLifeSpan()
                 });
+
                 x.Add(new TypeAction<IProvider,StringProvider>());
             });
 

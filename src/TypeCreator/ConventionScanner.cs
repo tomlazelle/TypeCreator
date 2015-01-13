@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using TypeCreator.Creation;
 
 namespace TypeCreator
 {
-    internal class ConventionScanner
+    public interface IConventionScanner
+    {
+        void Execute(TypeContextFactory factory);
+    }
+
+    internal class ConventionScanner : IConventionScanner
     {
         private Assembly[] _assemblies;
-        private Action<Type> _action;
+        private Action<Type, TypeContextFactory> _action;
 
         private static Lazy<ConventionScanner> _instance = new Lazy<ConventionScanner>(() => new ConventionScanner());
         private Type[] _types;
@@ -32,7 +38,7 @@ namespace TypeCreator
             return this;
         }
 
-        public ConventionScanner Do(Action<Type> action)
+        public ConventionScanner Do(Action<Type, TypeContextFactory> action)
         {
             _action = action;
 
@@ -40,7 +46,7 @@ namespace TypeCreator
         }
 
 
-        public void Scan()
+        public void Execute(TypeContextFactory factory)
         {
             foreach (var assembly in _assemblies)
             {
@@ -65,7 +71,7 @@ namespace TypeCreator
 
                 foreach (var foundType in foundTypes)
                 {
-                    _action.Invoke(foundType);
+                    _action.Invoke(foundType,factory);
                 }
             }
         }
