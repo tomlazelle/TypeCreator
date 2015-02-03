@@ -1,58 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TypeCreator.AddStrategy;
 
 namespace TypeCreator.Creation
 {
-
-    public class DefaultLifeSpan:ILifeSpan
+    public class DefaultLifeSpan : ILifeSpan
     {
-        public virtual object Instance(TypeContextFactory factory,IBaseTypeAction typeAction)
+        public virtual object Instance(TypeContextFactory factory, IBaseTypeAction typeAction)
         {
-
             var concreteResult = GetTypeWithCtorParams(typeAction, factory) ?? Activator.CreateInstance(typeAction.TypeToCreate);
-            if (typeAction.GetType().GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(ITypeAction<,>)))
+            if (typeAction.GetType().GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof (ITypeAction<,>)))
             {
                 dynamic typeContainer = typeAction;
                 if (typeContainer.AfterCreationDoThis != null)
                 {
-                    concreteResult = typeContainer.AfterCreationDoThis((dynamic)concreteResult);
+                    concreteResult = typeContainer.AfterCreationDoThis((dynamic) concreteResult);
                 }
             }
 
             return concreteResult;
         }
 
+        private bool CtorHasTheseParameters(IEnumerable<ParameterInfo> parameterInfos, Type[] ctorTypes)
+        {
+            var result = true;
+            foreach (var parameterInfo in parameterInfos)
+            {
+                result = ctorTypes.Contains(parameterInfo.ParameterType);
+
+                if (!result) break;
+            }
+
+            return result;
+        }
+
         private object GetTypeWithCtorParams(IBaseTypeAction container, TypeContextFactory factory)
         {
-            var ctors = container.TypeToCreate.GetConstructors().Where(x => x.GetParameters().Any());
-
             object concreteResult = null;
-
-            if (ctors.Any())
+            IList<object> args = new List<object>();
+            if (container.Ctor != null)
             {
-                var ctorParams = ctors.First().GetParameters();
+                
+                var foundCtor = container.TypeToCreate.GetConstructor(container.Ctor);
 
-                IList<object> args = new List<object>();
+                CreateCtorParams(factory, foundCtor.GetParameters(), args);
 
-                foreach (var param in ctorParams)
+                concreteResult = foundCtor.Invoke(args.ToArray());
+            }
+            else
+            {
+                var ctors = container.TypeToCreate.GetConstructors().Where(x => x.GetParameters().Any());
+
+                if (ctors.Any())
                 {
-                    var foundType = factory.FindTypeFromParameter(param.ParameterType);
+                    var ctorParams = ctors.First().GetParameters();
+                   
+                    CreateCtorParams(factory, ctorParams, args);
 
-                    if (foundType != null)
-                    {
-                        var instanceToAdd = factory.GetInstance(foundType.RegisteredTypeAction.InterfaceType);
-
-                        args.Add(instanceToAdd);
-                    }
+                    concreteResult = container.TypeToCreate.GetConstructor(args.Select(x => x.GetType()).ToArray()).Invoke(args.ToArray());
                 }
-
-
-                concreteResult = container.TypeToCreate.GetConstructor(args.Select(x => x.GetType()).ToArray()).Invoke(args.ToArray());
             }
 
             return concreteResult;
+        }
+
+        private static void CreateCtorParams(TypeContextFactory factory, IEnumerable<ParameterInfo> parameterInfo, IList<object> args)
+        {
+            foreach (var param in parameterInfo)
+            {
+                var foundType = factory.FindTypeFromParameter(param.ParameterType);
+
+                if (foundType != null)
+                {
+                    var instanceToAdd = factory.GetInstance(foundType.RegisteredTypeAction.InterfaceType);
+
+                    args.Add(instanceToAdd);
+                }
+            }
         }
     }
 }

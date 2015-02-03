@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using TypeCreator.AddStrategy;
+using TypeCreator.Creation;
 
 namespace TypeCreator
 {
@@ -25,5 +26,6 @@ namespace TypeCreator
         void TypeScanner(Assembly[] assemblies, Type[] types);
 
         void AddTypeScanner(IConventionScanner conventionScanner);
+        void AddContainer(TypeActionContainer typeActionContainer);
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="TestObjects\IRepository.cs" />
     <Compile Include="TestObjects\Repository.cs" />
     <Compile Include="TestObjects\StringProvider.cs" />
+    <Compile Include="TypeActionContainerTestFixture.cs" />
     <Compile Include="TypeRegistryTestFixture.cs" />
     <Compile Include="TypeScannerTestFixture.cs" />
   </ItemGroup>

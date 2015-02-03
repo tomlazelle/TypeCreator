@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using TypeCreator.AddStrategy;
 using TypeCreator.Creation;
@@ -87,6 +88,11 @@ namespace TypeCreator
         public void AddTypeScanner(IConventionScanner conventionScanner)
         {
             conventionScanner.Execute(_factory);
+        }
+
+        public void AddContainer(TypeActionContainer typeActionContainer)
+        {
+            typeActionContainer.Actions().ToList().ForEach(x => _factory.Add(x));
         }
 
         public void Dispose()

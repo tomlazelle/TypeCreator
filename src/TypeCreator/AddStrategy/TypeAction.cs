@@ -19,7 +19,8 @@ namespace TypeCreator.AddStrategy
         public string Key { get; set; }
 
         public ILifeSpan LifeSpan { get; set; }
-
+        
+        public Type[] Ctor { get; set; }
     }
 
     public class TypeAction<TInterface, TConcrete> : ITypeAction<TInterface, TConcrete>
@@ -32,6 +33,8 @@ namespace TypeCreator.AddStrategy
         }
 
         public ILifeSpan LifeSpan { get; set; }
+        
+        public Type[] Ctor { get; set; }
 
         public Type InterfaceType { get; set; }
 
