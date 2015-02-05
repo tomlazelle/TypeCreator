@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>TypeCreator</id>
+    <version>1.0.0.0</version>
+    <authors>Tom LaZelle</authors>
+    <owners>Tom LaZelle</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>TypeCreate and IoC container for .net</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+
+	<references>
+		<reference file="TypeCreator.dll" target="lib"/>
+	</references>
+
+  </metadata>
+</package>

@@ -4,6 +4,7 @@ using TypeCreator;
 using TypeCreator.AddStrategy;
 using TypeCreator.Creation;
 using TypeCreator.ServiceProvider;
+using TypeCreator.Web.LifeSpan;
 using WebActivatorEx;
 using WebTestApp;
 using WebTestApp.Models;
@@ -18,12 +19,18 @@ namespace WebTestApp
         {
             var container = TypeRegistry.Construct(x =>
             {
-                x.Add(new TypeAction<ICustomer, Customer>{AfterCreationDoThis = p => {p.Name = "tom test"; return p;}});
+                x.Add(new TypeAction<ICustomer, Customer>
+                {
+                    AfterCreationDoThis = p =>
+                    {
+                        p.Name = "tom test";
+                        return p;
+                    }
+                });
                 x.Add(new TypeAction<IRepository, Repository>
                 {
-                    LifeSpan = new SingletonLifeSpan()
+                    LifeSpan = new SessionSingleton()
                 });
-                
             });
 
 

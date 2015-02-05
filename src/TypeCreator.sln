@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTestApp", "WebTestApp\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeCreator.ServiceProvider", "TypeCreator.ServiceProvider\TypeCreator.ServiceProvider.csproj", "{989D9E24-2494-4DCE-9009-34260B973072}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeCreator.Web.LifeSpan", "TypeCreator.Web.LifeSpan\TypeCreator.Web.LifeSpan.csproj", "{C0515002-837F-4883-882B-FA38EC790723}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A8BD9532-7942-4B61-86BA-56CBEC33A7CB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +40,10 @@ Global
 		{989D9E24-2494-4DCE-9009-34260B973072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{989D9E24-2494-4DCE-9009-34260B973072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{989D9E24-2494-4DCE-9009-34260B973072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0515002-837F-4883-882B-FA38EC790723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0515002-837F-4883-882B-FA38EC790723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0515002-837F-4883-882B-FA38EC790723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0515002-837F-4883-882B-FA38EC790723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

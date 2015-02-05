@@ -290,6 +290,10 @@
       <Project>{989D9E24-2494-4DCE-9009-34260B973072}</Project>
       <Name>TypeCreator.ServiceProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TypeCreator.Web.LifeSpan\TypeCreator.Web.LifeSpan.csproj">
+      <Project>{C0515002-837F-4883-882B-FA38EC790723}</Project>
+      <Name>TypeCreator.Web.LifeSpan</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TypeCreator\TypeCreator.csproj">
       <Project>{FD2E4514-56DB-49E7-A893-CAA034EEA936}</Project>
       <Name>TypeCreator</Name>

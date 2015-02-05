@@ -15,18 +15,14 @@ namespace TypeCreator.Tests
 
             var proxy = new ProxyGenerator();
 
-            var container = TypeRegistry.Construct(x =>
+            var container = TypeRegistry.Construct(x => x.Add(new TypeAction<ICustomer, Customer>
             {
-                x.Add(new TypeAction<ICustomer, Customer>
+                AfterCreationDoThis = f =>
                 {
-                    AfterCreationDoThis = f =>
-                    {
-                        f.Name = "this is a test";
-                        return proxy.CreateInterfaceProxyWithTargetInterface(f, new TestInterceptor());
-                    }
-                });
-
-            });
+                    f.Name = "this is a test";
+                    return proxy.CreateInterfaceProxyWithTargetInterface(f, new TestInterceptor());
+                }
+            }));
 
             var customer = container.GetInstance<ICustomer>();
 
