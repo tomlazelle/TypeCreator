@@ -43,6 +43,7 @@
     <Compile Include="AddStrategy\TypeAction.cs" />
     <Compile Include="AddStrategy\TypeActionFacade.cs" />
     <Compile Include="ConventionScanner.cs" />
+    <Compile Include="Creation\ThreadLocalLifeSpan.cs" />
     <Compile Include="Creation\DefaultLifeSpan.cs" />
     <Compile Include="Creation\ILifeSpan.cs" />
     <Compile Include="Creation\SingletonLifeSpan.cs" />
