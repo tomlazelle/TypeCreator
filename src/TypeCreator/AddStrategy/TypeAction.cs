@@ -11,6 +11,13 @@ namespace TypeCreator.AddStrategy
             TypeToCreate = TConcrete;
             LifeSpan = new DefaultLifeSpan();
         }
+        public TypeAction(Type TInterface, Type TConcrete,object instance)
+        {
+            InterfaceType = TInterface;
+            TypeToCreate = TConcrete;
+            LifeSpan = new DefaultLifeSpan();
+            Instance = instance;
+        }
 
         public Type InterfaceType { get; set; }
 
@@ -21,6 +28,7 @@ namespace TypeCreator.AddStrategy
         public ILifeSpan LifeSpan { get; set; }
         
         public Type[] Ctor { get; set; }
+        public object Instance { get; set; }
     }
 
     public class TypeAction<TInterface, TConcrete> : ITypeAction<TInterface, TConcrete>
@@ -31,10 +39,18 @@ namespace TypeCreator.AddStrategy
             TypeToCreate = typeof(TConcrete);
             LifeSpan = new DefaultLifeSpan();
         }
+        public TypeAction(TInterface instance)
+        {
+            InterfaceType = typeof(TInterface);
+            TypeToCreate = typeof(TConcrete);
+            LifeSpan = new DefaultLifeSpan();
 
+            Instance = instance;
+        }
         public ILifeSpan LifeSpan { get; set; }
         
         public Type[] Ctor { get; set; }
+        public object Instance { get; set; }
 
         public Type InterfaceType { get; set; }
 

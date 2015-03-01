@@ -7,14 +7,15 @@ using TypeCreator.Creation;
 
 namespace TypeCreator
 {
-    internal class TypeContext : ITypeContext
+    public class TypeContext : ITypeContext
     {
 
         private TypeContextFactory _factory;
 
         public TypeContext()
         {
-            _factory = new TypeContextFactory();
+            _factory = new TypeContextFactory();            
+            _factory.Add(new TypeAction<ITypeContext,TypeContext>(this));
         }
 
         public IEnumerable<T> GetAllInstances<T>()

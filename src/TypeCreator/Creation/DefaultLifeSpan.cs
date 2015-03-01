@@ -10,7 +10,8 @@ namespace TypeCreator.Creation
     {
         public virtual object Instance(TypeContextFactory factory, IBaseTypeAction typeAction)
         {
-            var concreteResult = GetTypeWithCtorParams(typeAction, factory) ?? Activator.CreateInstance(typeAction.TypeToCreate);
+            var concreteResult = GetInstanceType(factory, typeAction);
+
             if (typeAction.GetType().GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof (ITypeAction<,>)))
             {
                 dynamic typeContainer = typeAction;
@@ -22,6 +23,21 @@ namespace TypeCreator.Creation
 
             return concreteResult;
         }
+
+
+        private object GetInstanceType(TypeContextFactory factory, IBaseTypeAction typeAction)
+        {
+            if (typeAction.Instance != null)
+            {
+                return typeAction.Instance;
+            }
+
+            var concreteResult = GetTypeWithCtorParams(typeAction, factory) ?? Activator.CreateInstance(typeAction.TypeToCreate);
+
+            return concreteResult;
+        }
+
+
 
         private bool CtorHasTheseParameters(IEnumerable<ParameterInfo> parameterInfos, Type[] ctorTypes)
         {

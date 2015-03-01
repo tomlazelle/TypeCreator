@@ -10,6 +10,7 @@ namespace TypeCreator.AddStrategy
         string Key { get; set; }
         ILifeSpan LifeSpan { get; set; }
         Type[] Ctor { get; set; }
+        object Instance { get; set; }
     }
 
     public interface ITypeAction<TInterface,TConcrete>:IBaseTypeAction
